@@ -27,7 +27,7 @@ pipeline {
 //             success {
 //                junit '**/target/surefire-reports/TEST-*.xml'
 //             }
-         }
+//          }
       }
 //         stage('reports') {
 //             steps {
