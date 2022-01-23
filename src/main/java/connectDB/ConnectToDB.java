@@ -1,6 +1,6 @@
 package connectDB;
 
-import model.ArtistModel;
+import model.EmployeesModel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +17,7 @@ public class ConnectToDB {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    private void connect() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    private void connect() {
         try {
             connect = DriverManager.getConnection("jdbc:mysql://localhost/",
                                                   "root", "");
@@ -26,8 +26,7 @@ public class ConnectToDB {
         }
     }
 
-    public List<ArtistModel> getArtists(String tableName) throws SQLException, ClassNotFoundException,
-            InstantiationException, IllegalAccessException {
+    public List<EmployeesModel> getEmployees(String tableName) throws SQLException {
         connect();
         preparedStatement = connect.prepareStatement(String.format("select * from %s", tableName));
         resultSet = preparedStatement
@@ -35,12 +34,12 @@ public class ConnectToDB {
         return getGroupList(resultSet);
     }
 
-    public List<ArtistModel> getGroupList(ResultSet resultSet) throws SQLException {
-        List<ArtistModel> groups = new ArrayList<>();
+    public List<EmployeesModel> getGroupList(ResultSet resultSet) throws SQLException {
+        List<EmployeesModel> groups = new ArrayList<>();
         while (resultSet.next()) {
-            groups.add(new ArtistModel(
-                    resultSet.getInt("ArtistId"),
-                    resultSet.getString("Name")));
+            groups.add(new EmployeesModel(
+                    resultSet.getString("Name"),
+                    resultSet.getString("Job")));
             groups.iterator();
         }
         return groups;
