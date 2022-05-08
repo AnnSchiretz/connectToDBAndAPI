@@ -19,10 +19,13 @@ public class ConnectToDB {
 
     private void connect() {
         try {
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/",
-                                                  "root", "");
+            connect = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/new_schema?user=root&useUnicode=true" +
+                                                          "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+//            e.printStackTrace();
         }
     }
 
