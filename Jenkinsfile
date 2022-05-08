@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent
    tools {
       // Install the Maven version configured as "M3" and add it to the path.
       maven "M3"
@@ -12,7 +12,7 @@ pipeline {
       stage('Build') {
          steps {
             // Get some code from a GitHub repository
-            git branch: "${params.BRANCH}", url: 'https://github.com/AnnSchiretz/OzBy.git'
+            git branch: '''${params.BRANCH}''', url: 'https://github.com/AnnSchiretz/OzBy.git'
 
             // Run Maven on a Unix agent.
             sh "mvn -Dmaven.test.failure.ignore=true clean test"
