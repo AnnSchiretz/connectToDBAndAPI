@@ -2,15 +2,14 @@ pipeline {
    agent any
    tools {
       // Install the Maven version configured as "M3" and add it to the path.
-      maven "MAVEN_HOME"
-      jdk "JAVA_HOME"
+      maven "M3"
    }
    parameters {
     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
    }
 
    stages {
-      stage('Build') {
+      stage('build') {
          steps {
             // Get some code from a GitHub repository
             git branch: "${params.BRANCH}", url: 'https://github.com/AnnSchiretz/connectToDBAndAPI.git'
