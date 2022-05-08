@@ -12,7 +12,7 @@ pipeline {
       stage('Build') {
          steps {
             // Get some code from a GitHub repository
-            git branch: '''${params.BRANCH}''', url: 'https://github.com/AnnSchiretz/OzBy.git'
+            git branch: '''${params.BRANCH}''', url: 'https://github.com/AnnSchiretz/connectToDBAndAPI.git'
 
             // Run Maven on a Unix agent.
             sh "mvn -Dmaven.test.failure.ignore=true clean test"
