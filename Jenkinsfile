@@ -43,7 +43,7 @@ pipeline {
                     allure([
                             includeProperties: false,
                             properties       : [],
-                            reportBuildPolicy: 'ALWAYS',
+                            reportBuildPolicy: "ALWAYS",
                             results          : [path: "target/allure-report"]
                     ])
                 }
