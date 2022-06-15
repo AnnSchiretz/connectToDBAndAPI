@@ -19,9 +19,9 @@ public class EmployeesAdapter extends Adapter {
                         .body(gson.toJson(employee))
                         .log().body()
                         .when()
-                        .post(path)
+                        .put(path)
                         .then()
-                        .statusCode(201)
+                        .statusCode(200)
                         .contentType(ContentType.JSON).extract().response();
         return gson.fromJson(response.asString().trim(), JobUser.class);
     }

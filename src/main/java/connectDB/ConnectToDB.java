@@ -45,6 +45,7 @@ public class ConnectToDB {
                     resultSet.getString("Job")));
             groups.iterator();
         }
+
         return groups;
     }
 

@@ -1,5 +1,13 @@
+import groovy.sql.Sql
 pipeline {
    agent
+    node{
+        def conn = Sql.newInstance("jdbc:mysql://127.0.0.1:3306/new_schema?user=root&useUnicode=" +
+                "true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",  "com.mysql.jdbc.Driver")
+        def rows = conn.rows("select username from users LIMIT 10")
+        assert rows.size() == 10
+        println rows.join('\n')
+    }
    tools {
       // Install the Maven version configured as "M3" and add it to the path.
       maven "M3"

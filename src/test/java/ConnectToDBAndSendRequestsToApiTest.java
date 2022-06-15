@@ -14,7 +14,6 @@ import static org.hamcrest.Matchers.equalTo;
 public class ConnectToDBAndSendRequestsToApiTest {
 
     public EmployeesModel anyEmployee = null;
-    public ConnectToDB connect;
 
     @BeforeTest
     public static ConnectToDB connectToDB() {
@@ -27,14 +26,15 @@ public class ConnectToDBAndSendRequestsToApiTest {
         artistsList.forEach(System.out::println);
         anyEmployee = artistsList.get(artistsList.size() - 3);
         System.out.println(anyEmployee.toString());
-
+        System.out.println(System.getProperty("java.ext.dirs"));
     }
 
     @Test
     public void setNewUserFromDBToApi() throws SQLException {
         List<EmployeesModel> artistsList = connectToDB().getEmployees("new_schema.Employ");
         anyEmployee = artistsList.get(artistsList.size() - 3);
-        JobUser result = new EmployeesAdapter().post("https://reqres.in/api/users", anyEmployee);
+        JobUser result = new EmployeesAdapter().post("https://reqres.in/api/users/2", anyEmployee);
+
         assertThat(anyEmployee.getName(), equalTo(result.getName()));
     }
 
