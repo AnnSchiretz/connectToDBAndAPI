@@ -3,8 +3,8 @@ import groovy.sql.Sql
 pipeline {
     agent
     node {
-//        def conn = new Sql.newInstance("jdbc:mysql://127.0.0.1:3306/new_schema?user=root&useUnicode=" +
-//                "true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "com.mysql.jdbc.Driver")
+        //        def conn = new Sql.newInstance("jdbc:mysql://127.0.0.1:3306/new_schema?user=root&useUnicode=" +
+        //                "true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "com.mysql.jdbc.Driver")
         println System.getProperty("java.ext.dirs")
 
     }
@@ -21,7 +21,6 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                 git branch: '''${params.BRANCH}''', url: 'https://github.com/AnnSchiretz/connectToDBAndAPI.git'
-
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean test"
 
@@ -42,9 +41,9 @@ pipeline {
                 script {
                     allure([
                             includeProperties: false,
-                            properties       : [],
+                            properties: [],
                             reportBuildPolicy: "ALWAYS",
-                            results          : [path: "target/allure-report"]
+                            results: [path: "target/allure-report"]
                     ])
                 }
             }
